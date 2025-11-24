@@ -269,12 +269,12 @@
             </h2>
 
             <div
-              id="quote-display"
-              class="min-h-[80px] flex items-center justify-center text-center mb-6"
+              class="min-h-[100px] flex items-center justify-center text-center mb-4 px-2"
             >
               <p
-                class="text-gray-600 italic font-medium text-lg transition-all duration-500"
+                class="text-gray-600 italic font-medium text-lg transition-opacity duration-300 ease-in-out"
                 id="quote-text"
+                style="opacity: 1"
               >
                 "You are capable of amazing things, my love."
               </p>
@@ -282,6 +282,7 @@
 
             <button
               onclick="newQuote()"
+              id="quote-btn"
               class="w-full py-3 bg-pink-500 hover:bg-pink-600 active:scale-95 transition-all rounded-xl text-white font-bold shadow-lg shadow-pink-200 flex items-center justify-center gap-2"
             >
               <i data-lucide="refresh-cw" class="w-4 h-4"></i>
@@ -333,26 +334,47 @@
         "Keep shining, beautiful.",
         "Your potential is endless.",
       ];
-
+      let isAnimating = false;
       function newQuote() {
-        const textElement = document.getElementById("quote-text");
+        if (isAnimating) return; // Prevent spam clicking
+        isAnimating = true;
 
-        // Fade out
+        const textElement = document.getElementById("quote-text");
+        const btn = document.getElementById("quote-btn");
+
+        // Visual feedback on button
+        const originalBtnContent = btn.innerHTML;
+        btn.innerHTML =
+          '<i data-lucide="loader" class="w-4 h-4 animate-spin"></i> Finding love...';
+        lucide.createIcons();
+
+        // 1. Fade Out
         textElement.style.opacity = "0";
 
         setTimeout(() => {
-          // Change text logic: avoid same quote twice in a row
+          // 2. Logic to choose new quote
           let currentQuote = textElement.innerText.replace(/"/g, "");
           let randomQuote;
           do {
             randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
           } while (randomQuote === currentQuote && quotes.length > 1);
 
+          // 3. Clean the element and Force a browser "Reflow"
+          // This forces the browser to realize the old text is gone
+          textElement.innerText = "";
+          void textElement.offsetWidth; // The magic line that forces a repaint
+
+          // 4. Set new text
           textElement.innerText = `"${randomQuote}"`;
 
-          // Fade in
+          // 5. Fade In
           textElement.style.opacity = "1";
-        }, 400);
+
+          // Reset button
+          btn.innerHTML = originalBtnContent;
+          lucide.createIcons();
+          isAnimating = false;
+        }, 300);
       }
 
       // --- Logic for Background Bubbles ---
