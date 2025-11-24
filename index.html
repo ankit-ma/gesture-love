@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>For My Special One</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+      body {
+        font-family: "Nunito", sans-serif;
+        background: linear-gradient(180deg, #fff0f5 0%, #ffe4e1 100%);
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      h1,
+      h2,
+      .handwriting {
+        font-family: "Pacifico", cursive;
+      }
+
+      /* Card Flip Animation Classes */
+      .perspective-1000 {
+        perspective: 1000px;
+      }
+
+      .transform-style-3d {
+        transform-style: preserve-3d;
+      }
+
+      .backface-hidden {
+        backface-visibility: hidden;
+      }
+
+      .rotate-y-180 {
+        transform: rotateY(180deg);
+      }
+
+      /* Heartbeat Animation */
+      @keyframes heartbeat {
+        0% {
+          transform: scale(1);
+        }
+        25% {
+          transform: scale(1.1);
+        }
+        50% {
+          transform: scale(1);
+        }
+        75% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .animate-heartbeat {
+        animation: heartbeat 1.5s infinite;
+      }
+
+      /* Floating Bubbles for Background */
+      .bubble {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 192, 203, 0.4);
+        animation: float 8s infinite ease-in-out;
+        z-index: -1;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0px) translateX(0px);
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100vh) translateX(20px);
+          opacity: 0;
+        }
+      }
+
+      /* Custom Scrollbar hiding */
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen text-gray-800 overflow-x-hidden relative">
+    <!-- Background Bubbles (Decor) -->
+    <div
+      id="background-decor"
+      class="fixed inset-0 overflow-hidden pointer-events-none"
+    ></div>
+
+    <!-- Main Content Container -->
+    <div
+      class="max-w-md mx-auto min-h-screen flex flex-col pb-20 relative z-10"
+    >
+      <!-- Header -->
+      <header class="text-center pt-10 pb-6 px-6">
+        <div
+          class="inline-block p-3 bg-white rounded-full shadow-md mb-4 animate-heartbeat"
+        >
+          <i
+            data-lucide="heart"
+            class="w-8 h-8 text-pink-500 fill-pink-500"
+          ></i>
+        </div>
+        <h1 class="text-4xl text-pink-600 mb-2">Hey Beautiful</h1>
+        <p class="text-gray-600 font-semibold">
+          Just a little reminder of how amazing you are.
+        </p>
+      </header>
+
+      <!-- Section 1: Pick a Card (Reasons why I love you) -->
+      <section class="px-6 mb-8">
+        <h2 class="text-2xl text-pink-500 mb-4 pl-2 border-l-4 border-pink-400">
+          Why Divu is so Special
+        </h2>
+        <p class="text-sm text-gray-500 mb-4 pl-2">
+          Tap a card to Know it &hearts;
+        </p>
+
+        <div class="grid grid-cols-2 gap-4">
+          <!-- Card 1 -->
+          <div
+            class="h-40 w-full perspective-1000 cursor-pointer group"
+            onclick="flipCard(this)"
+          >
+            <div
+              class="relative w-full h-full text-center transition-transform duration-700 transform-style-3d card-inner"
+            >
+              <!-- Front -->
+              <div
+                class="absolute w-full h-full bg-white rounded-2xl shadow-lg border-2 border-pink-100 backface-hidden flex flex-col items-center justify-center p-4"
+              >
+                <i data-lucide="smile" class="w-10 h-10 text-pink-400 mb-2"></i>
+                <span class="font-bold text-pink-500">Your Smile</span>
+              </div>
+              <!-- Back -->
+              <div
+                class="absolute w-full h-full bg-gradient-to-br from-pink-400 to-pink-500 rounded-2xl shadow-lg backface-hidden rotate-y-180 flex items-center justify-center p-4"
+              >
+                <p class="text-white text-sm font-semibold leading-tight">
+                  It literally lights up my entire world. You have the prettiest
+                  smile.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div
+            class="h-40 w-full perspective-1000 cursor-pointer group"
+            onclick="flipCard(this)"
+          >
+            <div
+              class="relative w-full h-full text-center transition-transform duration-700 transform-style-3d card-inner"
+            >
+              <!-- Front -->
+              <div
+                class="absolute w-full h-full bg-white rounded-2xl shadow-lg border-2 border-pink-100 backface-hidden flex flex-col items-center justify-center p-4"
+              >
+                <i data-lucide="star" class="w-10 h-10 text-pink-400 mb-2"></i>
+                <span class="font-bold text-pink-500">Your Soul</span>
+              </div>
+              <!-- Back -->
+              <div
+                class="absolute w-full h-full bg-gradient-to-br from-pink-400 to-pink-500 rounded-2xl shadow-lg backface-hidden rotate-y-180 flex items-center justify-center p-4"
+              >
+                <p class="text-white text-sm font-semibold leading-tight">
+                  You are kind, strong, and beautiful inside out.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div
+            class="h-40 w-full perspective-1000 cursor-pointer group"
+            onclick="flipCard(this)"
+          >
+            <div
+              class="relative w-full h-full text-center transition-transform duration-700 transform-style-3d card-inner"
+            >
+              <!-- Front -->
+              <div
+                class="absolute w-full h-full bg-white rounded-2xl shadow-lg border-2 border-pink-100 backface-hidden flex flex-col items-center justify-center p-4"
+              >
+                <i data-lucide="sun" class="w-10 h-10 text-pink-400 mb-2"></i>
+                <span class="font-bold text-pink-500">Your Laugh</span>
+              </div>
+              <!-- Back -->
+              <div
+                class="absolute w-full h-full bg-gradient-to-br from-pink-400 to-pink-500 rounded-2xl shadow-lg backface-hidden rotate-y-180 flex items-center justify-center p-4"
+              >
+                <p class="text-white text-sm font-semibold leading-tight">
+                  Hearing you laugh is my favorite melody. It brings me so much
+                  joy.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div
+            class="h-40 w-full perspective-1000 cursor-pointer group"
+            onclick="flipCard(this)"
+          >
+            <div
+              class="relative w-full h-full text-center transition-transform duration-700 transform-style-3d card-inner"
+            >
+              <!-- Front -->
+              <div
+                class="absolute w-full h-full bg-white rounded-2xl shadow-lg border-2 border-pink-100 backface-hidden flex flex-col items-center justify-center p-4"
+              >
+                <i data-lucide="gem" class="w-10 h-10 text-pink-400 mb-2"></i>
+                <span class="font-bold text-pink-500">Just You</span>
+              </div>
+              <!-- Back -->
+              <div
+                class="absolute w-full h-full bg-gradient-to-br from-pink-400 to-pink-500 rounded-2xl shadow-lg backface-hidden rotate-y-180 flex items-center justify-center p-4"
+              >
+                <p class="text-white text-sm font-semibold leading-tight">
+                  There is no one else like you. You are a masterpiece.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Motivation Generator -->
+      <section class="px-6 mb-8">
+        <div
+          class="bg-white rounded-3xl shadow-xl p-6 border border-pink-100 relative overflow-hidden"
+        >
+          <!-- Decorative circle -->
+          <div
+            class="absolute -top-10 -right-10 w-32 h-32 bg-pink-50 rounded-full z-0"
+          ></div>
+
+          <div class="relative z-10">
+            <h2
+              class="text-xl font-bold text-gray-700 mb-4 flex items-center gap-2"
+            >
+              <i data-lucide="sparkles" class="text-yellow-400 w-5 h-5"></i>
+              Daily Dose of Love for Queen Divu
+            </h2>
+
+            <div
+              id="quote-display"
+              class="min-h-[80px] flex items-center justify-center text-center mb-6"
+            >
+              <p
+                class="text-gray-600 italic font-medium text-lg transition-all duration-500"
+                id="quote-text"
+              >
+                "You are capable of amazing things, my love."
+              </p>
+            </div>
+
+            <button
+              onclick="newQuote()"
+              class="w-full py-3 bg-pink-500 hover:bg-pink-600 active:scale-95 transition-all rounded-xl text-white font-bold shadow-lg shadow-pink-200 flex items-center justify-center gap-2"
+            >
+              <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+              Tell me something good
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Interactive "Love" Button -->
+      <div class="mt-auto px-6 text-center pb-6">
+        <p class="text-gray-400 text-xs mb-4 uppercase tracking-widest">
+          Made with love for you
+        </p>
+        <button
+          id="love-btn"
+          onclick="showerConfetti()"
+          class="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-white transition-all duration-200 bg-gradient-to-r from-pink-500 to-rose-500 font-lg rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 hover:shadow-xl active:scale-95"
+        >
+          <span class="mr-2">Tap for Virtual Hug 🤗</span>
+          <i
+            data-lucide="heart-handshake"
+            class="w-5 h-5 group-hover:scale-125 transition-transform"
+          ></i>
+        </button>
+      </div>
+    </div>
+
+    <script>
+      // Initialize Lucide Icons
+      lucide.createIcons();
+
+      // --- Logic for Card Flipping ---
+      function flipCard(element) {
+        const inner = element.querySelector(".card-inner");
+        inner.classList.toggle("rotate-y-180");
+      }
+
+      // --- Logic for Quotes ---
+      const quotes = [
+        "You are stronger than you think.",
+        "Your beauty captures me, but your soul holds me.",
+        "Don't forget to be awesome today!",
+        "I believe in you, always.",
+        "You make the world a softer, better place.",
+        "Take a deep breath. You've got this.",
+        "Every day with you is my favorite day.",
+        "You are the poem I never knew how to write.",
+        "Keep shining, beautiful.",
+        "Your potential is endless.",
+      ];
+
+      function newQuote() {
+        const textElement = document.getElementById("quote-text");
+
+        // Fade out
+        textElement.style.opacity = "0";
+
+        setTimeout(() => {
+          // Change text logic: avoid same quote twice in a row
+          let currentQuote = textElement.innerText.replace(/"/g, "");
+          let randomQuote;
+          do {
+            randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+          } while (randomQuote === currentQuote && quotes.length > 1);
+
+          textElement.innerText = `"${randomQuote}"`;
+
+          // Fade in
+          textElement.style.opacity = "1";
+        }, 300);
+      }
+
+      // --- Logic for Background Bubbles ---
+      function createBubbles() {
+        const container = document.getElementById("background-decor");
+        const bubbleCount = 10;
+
+        for (let i = 0; i < bubbleCount; i++) {
+          let bubble = document.createElement("div");
+          bubble.className = "bubble";
+          let size = Math.random() * 60 + 20; // 20px to 80px
+
+          bubble.style.width = `${size}px`;
+          bubble.style.height = `${size}px`;
+          bubble.style.left = `${Math.random() * 100}vw`;
+          bubble.style.bottom = `-${size}px`; // Start below screen
+          bubble.style.animationDuration = `${Math.random() * 5 + 5}s`;
+          bubble.style.animationDelay = `${Math.random() * 5}s`;
+
+          container.appendChild(bubble);
+        }
+      }
+      createBubbles();
+
+      // --- Logic for Confetti (Canvas-free DOM approach for simplicity in single file) ---
+      function showerConfetti() {
+        const btn = document.getElementById("love-btn");
+        const rect = btn.getBoundingClientRect();
+        const colors = ["#ff69b4", "#ffb6c1", "#ffd700", "#ff1493", "#ffffff"];
+
+        // Create 50 pieces of confetti
+        for (let i = 0; i < 50; i++) {
+          const confetti = document.createElement("div");
+          confetti.style.position = "fixed";
+          confetti.style.width = "10px";
+          confetti.style.height = "10px";
+          confetti.style.backgroundColor =
+            colors[Math.floor(Math.random() * colors.length)];
+          confetti.style.left = rect.left + rect.width / 2 + "px";
+          confetti.style.top = rect.top + rect.height / 2 + "px";
+          confetti.style.zIndex = "9999";
+          confetti.style.borderRadius = "50%";
+          confetti.style.pointerEvents = "none";
+
+          document.body.appendChild(confetti);
+
+          // Randomize movement
+          const angle = Math.random() * Math.PI * 2;
+          const velocity = Math.random() * 150 + 50;
+          const tx = Math.cos(angle) * velocity;
+          const ty = Math.sin(angle) * velocity - 100; // Tend slightly upwards
+
+          const rotation = Math.random() * 720;
+
+          // Animate
+          const animation = confetti.animate(
+            [
+              { transform: `translate(0, 0) rotate(0deg)`, opacity: 1 },
+              {
+                transform: `translate(${tx}px, ${ty}px) rotate(${rotation}deg)`,
+                opacity: 0,
+              },
+            ],
+            {
+              duration: 1000 + Math.random() * 500,
+              easing: "cubic-bezier(0.25, 1, 0.5, 1)",
+            }
+          );
+
+          animation.onfinish = () => confetti.remove();
+        }
+
+        // Change button text temporarily
+        const originalText = btn.innerHTML;
+        btn.innerHTML = `<span class="mr-2">Love You!</span> <i data-lucide="heart" class="w-5 h-5 fill-white text-white"></i>`;
+        lucide.createIcons();
+
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          lucide.createIcons();
+        }, 2000);
+      }
+    </script>
+  </body>
+</html>
